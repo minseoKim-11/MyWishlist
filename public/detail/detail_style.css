@@ -1,0 +1,294 @@
+@font-face {
+    font-family: 'Anton';
+    src: url('/Anton-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Do Hyeon", sans-serif;
+    src: url('/DoHyeon-Regular.ttf') format('truetype');
+    font-weight:normal;
+    font-style: normal;
+  }
+  .tooltip {
+    position: absolute;
+    background-color: black;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 12px;
+    z-index: 1000;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+body {
+    background-color: black;
+    margin: 0;
+    height: 100vh;
+    color: whitesmoke;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.05em;
+    overflow-x: hidden; /* 사이드바가 나타날 때 가로 스크롤이 생기지 않도록 */
+}
+
+.header {
+    color: whitesmoke;
+    background-color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 45px;
+    padding-bottom: 15px;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.05em;
+    font-size: 40px;
+}
+
+.content {
+    display: flex;
+    flex: 1;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.05em;
+}
+
+.aside {
+    position: fixed;
+    top: 0;
+    left: -180px; /* 처음에는 화면 밖에 위치 */
+    width: 180px;
+    height: 70%;
+    background-color: black;
+    box-sizing: border-box;
+    transition: left 0.3s ease; /* 슬라이드 효과를 위한 트랜지션 */
+    z-index: 1000; /* 다른 요소 위에 표시되도록 */
+    text-align: center;
+    display: block; /* 각 링크를 블록 요소로 설정하여 수직으로 정렬 */
+    color: whitesmoke; /* 하이퍼링크 텍스트 색상을 whitesmoke로 설정 */
+    text-decoration: none; /* 기본 밑줄 제거 (선택 사항) */
+    overflow-y: auto;
+    font-size: 17px;
+    margin-top: 160px;
+
+}
+.aside::-webkit-scrollbar {
+    width: 0px; /* 스크롤바의 너비를 0으로 설정하여 숨김 */
+    background: transparent; /* 배경을 투명하게 설정 */
+}
+.aside.visible {
+    left: 0; /* 버튼 클릭 시 화면 안으로 슬라이드 */
+}
+
+.toggle-button {
+    position: fixed;
+    top: 55px;
+    left: 70px;
+    width: 37px;
+    height: 37px;
+    background-color:whitesmoke;
+    color: black;
+    border: none;
+    cursor: pointer;
+    z-index: 1001; /* 사이드바보다 위에 표시 */
+    font-size: 23px;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    margin-left: 0;
+    transition: margin-left 0.3s ease; /* 사이드바가 나올 때 콘텐츠 이동 */
+}
+
+.left {
+    flex: 60;
+    display: flex;
+    justify-content: center;
+    align-items: center;  
+    margin-left: 30px; /* 오른쪽으로 약간의 여백을 추가 */
+}
+
+.right {
+    flex: 40;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    margin-right: 25px; /* 오른쪽으로 약간의 여백을 추가 */
+}
+
+.image-container {
+    width: 369px;
+    height: 492px;
+    position: relative;
+    overflow: hidden;
+    perspective: 1000px;
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease-in-out;
+}
+
+.image-front, .image-back {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: transform 0.6s ease-in-out;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.image-front {
+    transform: rotateY(0deg);
+}
+
+.image-back {
+    background-color: #333;
+    color: whitesmoke;
+    transform: rotateY(180deg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* 세로 정렬을 위한 설정 */
+    justify-content: center; /* 수직 중앙 정렬 */
+    align-items: center; /* 수평 중앙 정렬 */
+    background-color: #333;
+    color: whitesmoke;
+    transform: rotateY(180deg);
+    box-sizing: border-box;
+    padding-right: 30px;
+    font-size: 20px;
+
+}
+.image-back a {
+    text-align: center;
+    display: block; /* 각 링크를 블록 요소로 설정하여 수직으로 정렬 */
+    margin: 20px; /* 각 링크 사이에 간격 설정 */
+    margin-left: 40px; /* 링크들 사이에 간격 추가 */
+    color: whitesmoke; /* 하이퍼링크 텍스트 색상을 whitesmoke로 설정 */
+    text-decoration: none; /* 기본 밑줄 제거 (선택 사항) */
+}
+.image-back a:hover {
+    color: whitesmoke; /* 마우스를 올렸을 때도 동일한 색상 유지 */
+}
+
+.image-container.flipped .image-front {
+    transform: rotateY(180deg);
+}
+
+.image-container.flipped .image-back {
+    transform: rotateY(0deg);
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+img.active {
+    opacity: 1;
+    transform: translateX(0);
+    z-index: 2;
+}
+
+img.next {
+    opacity: 0;
+    transform: translateX(100%);
+    z-index: 1;
+}
+
+img.prev {
+    opacity: 0;
+    transform: translateX(-100%);
+    z-index: 1;
+}
+
+.description {
+    font-size: 18px;
+    line-height: 1.6;
+    width: 500px;
+    margin-right: 100px;
+    padding-right: 10px;
+
+}
+.description a{
+    font-size: 30px;
+    color: whitesmoke; /* 하이퍼링크 텍스트 색상을 whitesmoke로 설정 */
+    text-decoration: none; /* 기본 밑줄 제거 (선택 사항) */
+}
+.description p {
+    height: 100px; /* 원하는 높이로 설정 */
+    overflow: hidden; /* 텍스트가 넘칠 경우 숨기기 */
+    margin-bottom: 20px; /* h2 태그와 p 태그 사이의 간격을 조정 */
+    font-size: 20px;
+}
+
+.button-container {
+    display: flex;
+    width: 505px;
+    margin-top: 50px;
+    justify-content: space-between;
+}
+
+.imgbutton {
+    font-size: 23px;
+    width: 60px;
+    height: 40px;
+    margin: 30px;
+    background-color: black;
+    color: whitesmoke;
+    border: none;
+    cursor: pointer;
+}
+
+button {
+    font-size: 16px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 140px;
+    height: 50px;
+    font-family: 'Anton', sans-serif;
+    letter-spacing: 0.04em;
+}
+
+.aside p {
+    margin-top: 0;
+    font-size: 18px;
+}
+
+.aside ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.aside ul li {
+    margin-bottom: 10px;
+}
+
+.aside ul li a {
+    color: whitesmoke;
+    text-decoration: none;
+    display: block; /* 각 링크를 블록 요소로 설정하여 수직으로 정렬 */
+    margin-bottom: 30px; /* 각 링크 사이의 간격을 30px로 설정 */
+    font-size: 17px;
+        
+}
+
+.aside ul li a:hover {
+    text-decoration: underline;
+}

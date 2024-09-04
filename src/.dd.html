@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Detail Page 1</title>
+    <style>
+    @font-face {
+        font-family: 'Anton';
+        src: url('/Anton-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+    }
+    
+    body {
+        background-color: black;
+        margin: 0;
+        height: 100vh;
+        color: whitesmoke;
+        display: flex;
+        flex-direction: column;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 0.05em;
+        overflow-x: hidden; /* 사이드바가 나타날 때 가로 스크롤이 생기지 않도록 */
+    }
+    
+    .header {
+        color: whitesmoke;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 45px;
+        padding-bottom: 15px;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 0.05em;
+        font-size: 40px;
+    }
+    
+    .content {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 10px;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 0.05em;
+    }
+    
+    .aside {
+        position: fixed;
+        top: 0;
+        left: -150px; /* 처음에는 화면 밖에 위치 */
+        width: 150px;
+        height: 100%;
+        background-color: #222;
+        box-sizing: border-box;
+        transition: left 0.3s ease; /* 슬라이드 효과를 위한 트랜지션 */
+        z-index: 1000; /* 다른 요소 위에 표시되도록 */
+    }
+
+    .aside.visible {
+        left: 0; /* 버튼 클릭 시 화면 안으로 슬라이드 */
+    }
+
+    .toggle-button {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        width: 40px;
+        height: 40px;
+        background-color: #333;
+        color: whitesmoke;
+        border: none;
+        cursor: pointer;
+        z-index: 1001; /* 사이드바보다 위에 표시 */
+        font-size: 18px;
+    }
+
+    .main-content {
+        flex: 1;
+        display: flex;
+        margin-left: 0;
+        transition: margin-left 0.3s ease; /* 사이드바가 나올 때 콘텐츠 이동 */
+    }
+    
+    .left {
+        flex: 60;
+        display: flex;
+        justify-content: center;
+        align-items: center;  
+        margin-left: 30px; /* 오른쪽으로 약간의 여백을 추가 */
+    }
+    
+    .right {
+        flex: 40;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+        margin-right: 25px; /* 오른쪽으로 약간의 여백을 추가 */
+    }
+    
+    .image-container {
+        width: 369px;
+        height: 492px;
+        position: relative;
+        overflow: hidden;
+        perspective: 1000px;
+        cursor: pointer;
+        transform-style: preserve-3d;
+        transition: transform 0.6s ease-in-out;
+    }
+    
+    .image-front, .image-back {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        backface-visibility: hidden;
+        transition: transform 0.6s ease-in-out;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    
+    .image-front {
+        transform: rotateY(0deg);
+    }
+    
+    .image-back {
+        background-color: #333;
+        color: whitesmoke;
+        transform: rotateY(180deg);
+        padding: 20px;
+        display: flex;
+        flex-direction: column; /* 세로 정렬을 위한 설정 */
+        justify-content: center; /* 수직 중앙 정렬 */
+        align-items: center; /* 수평 중앙 정렬 */
+        background-color: #333;
+        color: whitesmoke;
+        transform: rotateY(180deg);
+        box-sizing: border-box;
+        padding-right: 30px;
+        font-size: 20px;
+    
+    }
+    .image-back a {
+        text-align: center;
+        display: block; /* 각 링크를 블록 요소로 설정하여 수직으로 정렬 */
+        margin: 20px; /* 각 링크 사이에 간격 설정 */
+        margin-left: 40px; /* 링크들 사이에 간격 추가 */
+        color: whitesmoke; /* 하이퍼링크 텍스트 색상을 whitesmoke로 설정 */
+        text-decoration: none; /* 기본 밑줄 제거 (선택 사항) */
+    }
+    .image-back a:hover {
+        color: whitesmoke; /* 마우스를 올렸을 때도 동일한 색상 유지 */
+    }
+    
+    .image-container.flipped .image-front {
+        transform: rotateY(180deg);
+    }
+    
+    .image-container.flipped .image-back {
+        transform: rotateY(0deg);
+    }
+    
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        top: 0;
+        left: 0;
+        transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+    }
+    
+    img.active {
+        opacity: 1;
+        transform: translateX(0);
+        z-index: 2;
+    }
+    
+    img.next {
+        opacity: 0;
+        transform: translateX(100%);
+        z-index: 1;
+    }
+    
+    img.prev {
+        opacity: 0;
+        transform: translateX(-100%);
+        z-index: 1;
+    }
+    
+    .description {
+        font-size: 18px;
+        line-height: 1.6;
+        width: 500px;
+        margin-right: 100px;
+        padding-right: 10px;
+    }
+    
+    .button-container {
+        display: flex;
+        width: 505px;
+        margin-top: 50px;
+        justify-content: space-between;
+    }
+    
+    .imgbutton {
+        font-size: 23px;
+        width: 60px;
+        height: 40px;
+        margin: 30px;
+        background-color: black;
+        color: whitesmoke;
+        border: none;
+        cursor: pointer;
+    }
+    
+    button {
+        font-size: 16px;
+        background-color: #333;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 140px;
+        height: 50px;
+        font-family: 'Anton', sans-serif;
+        letter-spacing: 0.04em;
+    }
+
+    .aside p {
+        margin-top: 0;
+        font-size: 18px;
+    }
+
+    .aside ul {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .aside ul li {
+        margin-bottom: 10px;
+    }
+
+    .aside ul li a {
+        color: whitesmoke;
+        text-decoration: none;
+        font-size: 16px;
+    }
+
+    .aside ul li a:hover {
+        text-decoration: underline;
+    }
+    </style>
+</head>
+<body>
+    <div class="header">
+        LOOK1
+    </div>
+    <button class="toggle-button" onclick="toggleSidebar()">☰</button> <!-- 사이드바 토글 버튼 -->
+    <div class="aside" id="sidebar">
+        <!-- 사이드바 내용 -->
+        <p>Sidebar Content</p>
+        <ul>
+            <li><a href="#">Link 1</a></li>
+            <li><a href="#">Link 2</a></li>
+            <li><a href="#">Link 3</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="main-content" id="mainContent">
+            <div class="left">
+                <button class="imgbutton" onclick="previousImage()">&#60;</button> <!-- 이전 이미지 버튼 -->
+                <div class="image-container" onclick="toggleFlip()">
+                    <div class="image-front">
+                        <img id="image-0" src="/image/image_1_0.png" alt="Detailed Image 1" class="active">
+                        <img id="image-1" src="/image/image_1_1.png" alt="Detailed Image 1">
+                        <img id="image-2" src="/image/image_1_2.png" alt="Detailed Image 1">
+                    </div>
+                    <!-- 상품 구매처 링크 부분 -->
+                    <div class="image-back">
+                        <a href="https://www.adidas.co.kr/?cm_mmc=AdieSEM_google-_-ALWAYSON-_-Trademark-_-Trademark__ADIDAS-_-dv:eCom-_-cn:ALWAYSON-_-pc:google&cm_mmc1=KR&cm_mmc2=PPC-TM-CrossCategory-None-Exact-KR-APAC-eCom-Paid_Search&gad_source=1&gclid=CjwKCAjwoJa2BhBPEiwA0l0ImF1bN5h0SB0HUy0Jel5PZYkvqYEMREDpeWlEn5lCQf28R_io7R87vBoCjSgQAvD_BwE"
+                        target="_blank">TOP🔗</a>
+                        <a href="https://www.adidas.co.kr/?cm_mmc=AdieSEM_google-_-ALWAYSON-_-Trademark-_-Trademark__ADIDAS-_-dv:eCom-_-cn:ALWAYSON-_-pc:google&cm_mmc1=KR&cm_mmc2=PPC-TM-CrossCategory-None-Exact-KR-APAC-eCom-Paid_Search&gad_source=1&gclid=CjwKCAjwoJa2BhBPEiwA0l0ImF1bN5h0SB0HUy0Jel5PZYkvqYEMREDpeWlEn5lCQf28R_io7R87vBoCjSgQAvD_BwE"
+                        target="_blank">BOTTOM🔗</a>
+                        <a href="https://www.adidas.co.kr/?cm_mmc=AdieSEM_google-_-ALWAYSON-_-Trademark-_-Trademark__ADIDAS-_-dv:eCom-_-cn:ALWAYSON-_-pc:google&cm_mmc1=KR&cm_mmc2=PPC-TM-CrossCategory-None-Exact-KR-APAC-eCom-Paid_Search&gad_source=1&gclid=CjwKCAjwoJa2BhBPEiwA0l0ImF1bN5h0SB0HUy0Jel5PZYkvqYEMREDpeWlEn5lCQf28R_io7R87vBoCjSgQAvD_BwE"
+                        target="_blank">SHOES🔗</a>
+                        <a href="https://www.adidas.co.kr/?cm_mmc=AdieSEM_google-_-ALWAYSON-_-Trademark-_-Trademark__ADIDAS-_-dv:eCom-_-cn:ALWAYSON-_-pc:google&cm_mmc1=KR&cm_mmc2=PPC-TM-CrossCategory-None-Exact-KR-APAC-eCom-Paid_Search&gad_source=1&gclid=CjwKCAjwoJa2BhBPEiwA0l0ImF1bN5h0SB0HUy0Jel5PZYkvqYEMREDpeWlEn5lCQf28R_io7R87vBoCjSgQAvD_BwE"
+                        target="_blank">ACC🔗</a>
+                    </div>
+                </div>
+                <button class="imgbutton" onclick="nextImage()">&#62;</button> <!-- 다음 이미지 버튼 -->
+            </div>
+            <div class="right">
+                <!-- LOOK 설명 -->
+                <div class="description">
+                    <h2># CASUAL</h2>
+                    <p>This is a detailed description of the image 1. You can describe the content, the context, or any other relevant information about the image here. This section can be as long as necessary to convey the message or story behind the image.</p>
+                    <div class="button-container">
+                        <button onclick="window.location.href='/detail/detail_0.html';"> < Previous Post</button>
+                        <button onclick="window.location.href='/detail/detail_2.html';">Next Post > </button>
+                        <button onclick="window.location.href='/?noAnim=true';">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('visible');
+            mainContent.classList.toggle('shifted');
+        }
+
+        const images = document.querySelectorAll('.image-front img');
+        let currentIndex = 0;
+
+        function updateClasses() {
+            images.forEach((img, index) => {
+                img.classList.remove('active', 'prev', 'next');
+                if (index === currentIndex) {
+                    img.classList.add('active');
+                } else if (index === (currentIndex + 1) % images.length) {
+                    img.classList.add('next');
+                } else if (index === (currentIndex - 1 + images.length) % images.length) {
+                    img.classList.add('prev');
+                }
+            });
+        }
+
+        function previousImage() {
+            currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
+            updateClasses();
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
+            updateClasses();
+        }
+
+        updateClasses(); // 초기화 호출
+
+        function toggleFlip() {
+            const container = document.querySelector('.image-container');
+            container.classList.toggle('flipped');
+        }
+    </script>
+</body>
+</html>

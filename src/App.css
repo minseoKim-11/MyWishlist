@@ -1,0 +1,108 @@
+/*APP.css*/
+@keyframes zoomOut {
+  from {
+    top: 50vh;
+    font-size: 55px;
+  }
+  to {
+    top: 0;
+    font-size: 37px;
+  }
+}
+@font-face {
+  font-family: 'Anton';
+  src: url('/public/Anton-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: black;
+  color: whitesmoke;
+  font-family: 'Anton', sans-serif;
+  letter-spacing: 0.08em; /* 자간을 0.05em 넓힘 */
+
+}
+.typeit-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  font-size: 55px;
+  top: 50vh; 
+}
+
+.typeit-container_move {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+  font-size: 35px;
+  animation: zoomOut 1.8s forwards;
+}
+
+.typeit {
+  color: whitesmoke;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 25px;
+  padding-bottom: 15px;
+}
+
+.main {
+  text-align: center;
+  background-color: black;
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 35px; /* 이미지 사이의 여백을 20px로 설정 */
+  padding:50px; /* 그리드 전체에 패딩을 추가하여 가장자리에 여백을 줌 */
+}
+
+.photo {
+  width: 100%;
+  transition: transform 0.3s ease;
+  box-sizing: border-box; /* 패딩과 여백을 고려하여 크기 조정 */
+  filter: grayscale(100%); /* 이미지를 흑백으로 설정 */
+
+}
+
+.photo-grid a {
+  display: block;
+  margin: 0;
+}
+.photo-grid a:hover .photo {
+  transform: scale(1.15);
+  z-index: 2;
+  filter: grayscale(0%); /* 마우스를 올렸을 때 원래 색상으로 변경 */
+
+}
+.mypage {
+  font-size: 25px;
+  padding: 15px;
+  padding-right: 50px; /* 오른쪽 패딩을 50px로 설정 */
+  padding-bottom: 50px;
+  display: flex;
+  justify-content: flex-end; /* 오른쪽으로 정렬 */
+  margin-right: 10px;
+}
+
+.mypage a {
+  margin-left: 40px; /* 링크들 사이에 간격 추가 */
+  color: whitesmoke; /* 하이퍼링크 텍스트 색상을 whitesmoke로 설정 */
+  text-decoration: none; /* 기본 밑줄 제거 (선택 사항) */
+}
+.mypage a:hover {
+  color: whitesmoke; /* 마우스를 올렸을 때도 동일한 색상 유지 */
+}
