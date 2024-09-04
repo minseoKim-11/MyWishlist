@@ -1,10 +1,6 @@
-# Getting Started with Create React App
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-In the project directory, you can run:
+# 0. 소개
+# 1. 개발 환경
+# 2. 개발 동기 
 
 ### `npm start`
 

@@ -6,7 +6,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 function App() {
   const [animationDone, setAnimationDone] = useState(false);
-  const [className, setClassName] = useState(''); // className 상태 추가
+  const [className, setClassName] = useState(''); 
 
   useEffect(() => {
     const timer = setTimeout(() => {
