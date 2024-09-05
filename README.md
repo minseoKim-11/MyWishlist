@@ -1,5 +1,5 @@
 ### 0. Project Title
-LookAroundMyWishlist
+<strong>LookAroundMyWishlist</strong>
 <hr>
 
 ### 1. Description
@@ -13,13 +13,13 @@ LookAroundMyWishlist
 - 이미지 위로 마우스 호버 시 확대되며 색상 확인 가능
 - 이미지 클릭 시 상세 페이지로 이동
 
-#### detailpage (HTML,CSS,javascript)
+#### detailpage (HTML,CSS,JavaScript)
 - 이미지 옆 좌우 버튼 클릭 시 슬라이드 모션으로 여러 장의 이미지 제공 
 - 이미지 클릭 시 카드가 돌아가는 모션과 함께  ITEM 구매 링크와 BrandWebsite 링크로 로드되는 하이퍼링크 제공
 - Previous Post, Next Post 버튼 클릭 시 이전, 다음 페이지로 이동
 - Back to Home 버튼 클릭 시 메인 페이지로 이동
 - 좌측 상단 ☰ 버튼 클릭 시 바로가기 사이드바 구현
-- 바로가기에 마우스 호버 시 tooltip으로 상품명 제공
+- 바로가기에 마우스 호버 시 Tooltip으로 상품명 제공
 <hr>
 
 ### 3. Contact
