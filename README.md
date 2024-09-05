@@ -1,8 +1,10 @@
 ### 0. Project Title
 LookAroundMyWishlist
+<hr>
 
 ### 1. Description
 이 프로젝트는 저의 위시리스트 상품들을 소개하는 웹 페이지를 구현한 서비스입니다. 사이트에 접속하면 이미지 그리드 기반의 웹 사이트가 등장하며, 사진을 클릭하면 해당 상품의 상세한 정보를 확인하실 수 있습니다.
+<hr>
 
 ### 2. Features
 #### mainpage
@@ -17,9 +19,11 @@ LookAroundMyWishlist
 - Back to Home 버튼 클릭 시 메인 페이지로 이동
 - 좌측 상단 ☰ 버튼 클릭 시 바로가기 사이드바 구현
 - 바로가기에 마우스 호버 시 tooltip으로 상품명 제공
+<hr>
 
 ### 3. Contact
 MAIL : kmssally05@gmail.com
+<hr>
 
 
 ### `npm start`
