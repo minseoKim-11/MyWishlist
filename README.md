@@ -9,6 +9,7 @@ LookAroundMyWishlist
 - 이미지 위로 마우스 호버 시 확대되며 색상 확인 가능
 - 이미지 클릭 시 상세 페이지로 이동
 <br>
+
 - 상세페이지에서 이미지 옆 좌우 버튼을 클릭하면 여러 장의 이미지 제공 
 - 이미지를 한 번 클릭하면 ITEM 구매 링크와 BRANDWEBPAGE 링크 제공
 - Previous Post, Next Post 버튼 클릭 시 이전, 다음 페이지로 이동
