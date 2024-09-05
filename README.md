@@ -14,8 +14,8 @@ LookAroundMyWishlist
 - 이미지 클릭 시 상세 페이지로 이동
 
 #### detailpage (HTML,CSS,javascript)
-- 상세 페이지에서 이미지 옆 좌우 버튼을 클릭하면 여러 장의 이미지 제공 
-- 이미지를 한 번 클릭하면 카드가 돌아가는 모션과 함께  ITEM 구매 링크와 BrandWebsite 링크로 로드되는 하이퍼링크 제공
+- 이미지 옆 좌우 버튼 클릭 시 슬라이드 모션으로 여러 장의 이미지 제공 
+- 이미지 클릭 시 카드가 돌아가는 모션과 함께  ITEM 구매 링크와 BrandWebsite 링크로 로드되는 하이퍼링크 제공
 - Previous Post, Next Post 버튼 클릭 시 이전, 다음 페이지로 이동
 - Back to Home 버튼 클릭 시 메인 페이지로 이동
 - 좌측 상단 ☰ 버튼 클릭 시 바로가기 사이드바 구현
