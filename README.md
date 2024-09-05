@@ -4,18 +4,18 @@ LookAroundMyWishlist
 
 ### 1. Description
 이 프로젝트는 저의 위시리스트 상품들을 소개하는 웹 페이지를 구현한 서비스입니다.<br>
-사이트에 접속하면 이미지 그리드 기반의 웹 사이트가 등장하며, 사진을 클릭하면 해당 상품의 상세한 정보를 확인하실 수 있습니다.
+웹 접속 시 이미지 그리드 기반의 메인 웹페이지가 로드되며, 사진을 클릭하면 해당 상품의 정보를 확인할 수 있는 상세 페이지로 이동합니다.
 <hr>
 
 ### 2. Features
-#### mainpage
-- 이미지 그리드 형태로 아이템을 한 눈에 살펴볼 수 있는 메인 페이지 제공
+#### mainpage (React)
+- 이미지 그리드 형태로 아이템을 한 눈에 살펴볼 수 있는 메인 페이지 로드
 - 이미지 위로 마우스 호버 시 확대되며 색상 확인 가능
 - 이미지 클릭 시 상세 페이지로 이동
 
-#### detailpage 
-- 상세페이지에서 이미지 옆 좌우 버튼을 클릭하면 여러 장의 이미지 제공 
-- 이미지를 한 번 클릭하면 ITEM 구매 링크와 BRANDWEBPAGE 링크 제공
+#### detailpage (HTML,CSS,javascript)
+- 상세 페이지에서 이미지 옆 좌우 버튼을 클릭하면 여러 장의 이미지 제공 
+- 이미지를 한 번 클릭하면 카드가 돌아가는 모션과 함께  ITEM 구매 링크와 BrandWebsite 링크로 로드되는 하이퍼링크 제공
 - Previous Post, Next Post 버튼 클릭 시 이전, 다음 페이지로 이동
 - Back to Home 버튼 클릭 시 메인 페이지로 이동
 - 좌측 상단 ☰ 버튼 클릭 시 바로가기 사이드바 구현
@@ -23,7 +23,7 @@ LookAroundMyWishlist
 <hr>
 
 ### 3. Contact
-MAIL : kmssally05@gmail.com
+E-MAIL : kmssally05@gmail.com
 <hr>
 
 
