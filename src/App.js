@@ -48,11 +48,6 @@ function App() {
                 </a>
               ))}
             </div>
-            <div className='mypage'> 
-                <a href="/information.html">Information</a>
-                <a href="#">Instagram</a>
-                <a href="/mypage.html">Mypage</a>
-            </div>
           </>
         )}
       </div>

@@ -88,21 +88,3 @@ html, body {
   filter: grayscale(0%); /* 마우스를 올렸을 때 원래 색상으로 변경 */
 
 }
-.mypage {
-  font-size: 25px;
-  padding: 15px;
-  padding-right: 50px; /* 오른쪽 패딩을 50px로 설정 */
-  padding-bottom: 50px;
-  display: flex;
-  justify-content: flex-end; /* 오른쪽으로 정렬 */
-  margin-right: 10px;
-}
-
-.mypage a {
-  margin-left: 40px; /* 링크들 사이에 간격 추가 */
-  color: whitesmoke; /* 하이퍼링크 텍스트 색상을 whitesmoke로 설정 */
-  text-decoration: none; /* 기본 밑줄 제거 (선택 사항) */
-}
-.mypage a:hover {
-  color: whitesmoke; /* 마우스를 올렸을 때도 동일한 색상 유지 */
-}
